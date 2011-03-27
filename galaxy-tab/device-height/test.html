@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<meta name="viewport" content="width=device-width, maximum-scale=1, target-densityDpi=device-dpi">
+<head>
+<style type="text/css">
+@import url(../base.css);
+
+.h235, .h500, .h501, .h600, .h887, .h1024 {
+    display:none;
+}
+
+@media screen and (device-height:235px) {
+    /* landscape with keyboard visible */
+    .na { display:none; }
+    .h235 { display:inline; }
+}
+
+@media screen and (device-height:500px) {
+    /* portrait with keyboard visible */
+    .na { display:none; }
+    .h500 { display:inline; }
+}
+
+@media screen and (device-height:501px) {
+    /* landscape */
+    .na { display:none; }
+    .h501 { display:inline; }
+}
+
+@media screen and (device-height:600px) {
+    /* 'true' landscape -- never triggered */
+    .na { display:none; }
+    .h600 { display:inline; }
+}
+
+@media screen and (device-height:887px) {
+    /* portrait */
+    .na { display:none; }
+    .h887 { display:inline; }
+}
+
+@media screen and (device-height:1024px) {
+    /* 'true' landscape -- never triggered */
+    .na { display:none; }
+    .h1024 { display:inline; }
+}
+
+</style>
+</head>
+<body>
+
+    <p>Load this page in a both orientations, observe the matching device-height.
+    Raise the virtual keyboard, again observe the device-height.</p>
+
+    <input type="text" placeholder="Touch me">
+
+    <p><strong>Expected</strong>: device-height should be a constant 1024 or 600.
+    Raising the virtual keyboard should not change device-height.</p>
+
+    <p><strong>Actual</strong>: Galaxy Tab changes the device width based on
+    orientation, dimensions of the browser chrome, and visibility of the
+    browser's chrome.</p>
+
+    <p class="result">device-height:
+        <em class="na">Not applicable</em>
+        <em class="h235">235px</em>
+        <em class="h500">500px</em>
+        <em class="h501">501px</em>
+        <em class="h600">600px</em>
+        <em class="h887">887px</em>
+        <em class="h1024">1024px</em>
+    </p>
+</body>
+</html>

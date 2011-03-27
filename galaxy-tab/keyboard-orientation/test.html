@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width">
+<style type="text/css">
+@import url(../base.css);
+
+.n { display:inline; }
+.p, .l { display:none; }
+
+@media only screen and (orientation: landscape) {
+    .n { display:none; }
+    .l { display:inline; }
+}
+@media only screen and (orientation: portrait) {
+    .n { display:none; }
+    .p { display:inline; }
+}
+</style>
+</head>
+
+    <p>Load this page in portrait mode. Observe @media orientation. Raise the
+    virtual keyboard. Observe the orientation changes.</p>
+
+    <input type="text" placeholder="Touch me">
+
+    <p><strong>Expected:</strong> Opening virtual keyboard should not affect orientation</p>
+
+    <p><strong>Actual:</strong> Galaxy Tab gets matches landscape @media queries when the device is in
+    portrait orientation and the keyboard is opened.</p>
+
+    <p class="result">@media orientation:
+        <em class="n">None</em>
+        <em class="p">Portrait</em>
+        <em class="l">Landscape</em>
+    </p>
+
+</body>
+</html>

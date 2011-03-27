@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<meta name="viewport" content="width=device-width, maximum-scale=1, target-densityDpi=device-dpi">
+<head>
+<style type="text/css">
+@import url(../base.css);
+
+body {
+    background:#ccc url("960grid.png") no-repeat 0 0;
+    padding:50px 1em 1em 1em;
+}
+
+div.above {
+    background:#fff;
+    padding:.5em;
+}
+
+/* Hide portrait and landscape indicators by default */
+
+.n { display:inline; }
+.p, .l { display:none; }
+
+/* Display appropriate indicator based on orientation */
+
+@media only screen and (orientation: landscape) {
+    .n { display:none; }
+    .l { display:inline; }
+}
+@media only screen and (orientation: portrait) {
+    .n { display:none; }
+    .p { display:inline; }
+}
+</style>
+</head>
+<body>
+
+    <div class="above">
+
+        <p>This is a debug tool to determine the effect on viewport dimensions
+        following <code>window.onload</code>, orientation change and raising
+        the virtual keyboard by focusing a text input.</p>
+
+        <p>Be patient, logging for focus and blur events are delayed by 1 second.</p>
+
+        <input type="text" id="textinput" placeholder="Touch me">
+
+        <p class="result">@media orientation:
+            <span class="n">n/a</span>
+            <span class="p">portrait</span>
+            <span class="l">landscape</span>
+        </p>
+
+        <div id="log" class="result"></div>
+
+    </div>
+
+</body>
+<script src="log.js"></script>
+<script>
+
+window.onerror = function (e) {
+    log.error(e);
+};
+
+// Wait before asking for dimensions.  Dimension values, when accessed immediately
+// from UI events or onload, are not always consistent unless requested after a delay.
+
+function trace (name, clearLog) {
+    setTimeout(function () {
+        if (clearLog) {
+            log.clear();
+        }
+
+        log("event", name);
+        log("screen.width", screen.width);
+        log("screen.height", screen.height);
+        log("window.innerWidth", innerWidth);
+        log("window.innerHeight", innerHeight);
+        log("document.documentElement.offsetWidth", document.documentElement.offsetWidth);
+        log("window.orientation", "orientation" in window ? orientation : "n/a");
+    }, 1000);
+}
+
+textinput.onfocus = textinput.onblur = function (e) {
+    trace(e.type, true);
+};
+
+addEventListener("orientationchange", function (e) {
+    trace(e.type, true);
+}, false);
+
+trace("onload");
+
+</script>
+</html>

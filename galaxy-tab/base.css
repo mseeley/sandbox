@@ -1,0 +1,14 @@
+input {
+    font-size:larger;
+}
+
+.err {
+    color:crimson;
+}
+
+.result {
+    border:1px solid #ccc;
+    padding:1em;
+    background-color:#eee;
+    font-size:large;
+}

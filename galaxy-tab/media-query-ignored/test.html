@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, maximum-scale=1, target-densityDpi=device-dpi">
+<style type="text/css">
+@import url(../base.css);
+
+.n { display:inline; }
+.w600, .w1024 { display:none; }
+
+@media only screen and (device-width:600) {
+    .n { display:none; }
+    .w600 { display:inline; }
+}
+@media only screen and (device-width:1024) {
+    .n { display:none; }
+    .w1024 { display:inline; }
+}
+</style>
+</head>
+
+    <p>Loading this page in in portrait mode should display either 600 or
+    1024 below.  If neither value display,  refresh until one does (see
+    device-width-pollution test for explanation).  After an expect value is
+    displayed rotate the Galaxy Tab 90 degrees.</p>
+
+    <p>Adding a @media query for an orientation (either) fixes this partially.
+    Example:
+<pre>
+@media only screen and (orientation:portrait) {
+    /* contents do not need to match a DOM element */
+    .foobar {
+        pitch:low;
+    }
+}
+</pre>
+    Although, if the keyboard is opened while the device is rotated the Galaxy
+    Tab will not match the new device-width @media query.</p>
+
+    <p><strong>Expected:</strong> After the device is rotated from portrait
+    orientation (ie, while displaying 600) the number 1024 should be displayed.
+    Likewise, when rotating from landscape (ie, while 1024 is displayed) the
+    number 600 should be displayed.</p>
+
+    <p><strong>Actual:</strong> The number displayed on page load is never
+    replaced on orientation change.</p>
+
+    <p class="result">@media orientation:
+        <em class="n">n/a</em>
+        <em class="w600">600</em>
+        <em class="w1024">1024</em>
+    </p>
+
+</body>
+</html>

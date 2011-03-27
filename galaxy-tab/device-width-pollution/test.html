@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en-US" dir="ltr">
+<meta name="viewport" content="width=device-width, maximum-scale=1, target-densityDpi=device-dpi">
+<head>
+<script>
+var swe = screen.width;
+addEventListener("load", function () {
+    document.getElementById("swe").innerHTML = swe;
+    document.getElementById("swo").innerHTML = screen.width;
+}, false);
+</script>
+<style type="text/css">
+@import url(../base.css);
+
+.w400, .w600, .w974, .w1024 {
+    display:none;
+}
+
+@media screen and (device-width:400px) {
+    /* landscape */
+    .na { display:none; }
+    .h501 { display:inline; }
+}
+
+@media screen and (device-width:600px) {
+    /* 'true' landscape -- never triggered */
+    .na { display:none; }
+    .h600 { display:inline; }
+}
+
+@media screen and (device-width:974px) {
+    /* portrait */
+    .na { display:none; }
+    .h887 { display:inline; }
+}
+</style>
+</head>
+<body>
+
+    <p>Load this page in the Galaxy Tab. Observe the results for the last
+    matched device-width.  Touch a test link, pressing back once you've read
+    the number on the page that loads.</p>
+
+    <ul>
+        <li><a href="width-400.html">Test 1: 400px layout</a></li>
+        <li><a href="width-974.html">Test 2: 974px layout</a></li>
+    </ul>
+
+    <p><strong>Expected</strong>: A constant device-width value of 600 should
+    be seen in the result region.  Also, <code>screen.width</code> should be
+    consistent when accessed early in the page load or at the onload event.</p>
+
+    <p><strong>Actual</strong>: Galaxy Tab applies width of the outermost
+    element with dimensions of the previous page when loading a new page. This
+    occurs on back button pushes or full reloads.  Also, <code>screen.width</code>
+    value change depending on when it was accessed.</p>
+
+    <p class="result">device-height:
+        <em class="na">Not applicable</em>
+        <em class="w400 err">400px</em>
+        <em class="w600">600px</em>
+        <em class="w974 err">974px</em>
+        <em class="w1024">1024px</em>
+    </p>
+
+    <p class="result">screen.width (early): <em id="swe"></em></p>
+
+    <p class="result">screen.width (onload): <em id="swo"></em></p>
+
+</body>
+</html>
