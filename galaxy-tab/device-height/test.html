@@ -5,20 +5,8 @@
 <style type="text/css">
 @import url(../base.css);
 
-.h235, .h500, .h501, .h600, .h887, .h1024 {
+.h501, .h600, .h887, .h1024 {
     display:none;
-}
-
-@media screen and (device-height:235px) {
-    /* landscape with keyboard visible */
-    .na { display:none; }
-    .h235 { display:inline; }
-}
-
-@media screen and (device-height:500px) {
-    /* portrait with keyboard visible */
-    .na { display:none; }
-    .h500 { display:inline; }
 }
 
 @media screen and (device-height:501px) {
@@ -49,26 +37,25 @@
 </head>
 <body>
 
-    <p>Load this page in a both orientations, observe the matching device-height.
-    Raise the virtual keyboard, again observe the device-height.</p>
-
-    <input type="text" placeholder="Touch me">
+    <p>Load this page in a both orientations, on the Galaxy Tab, observe the matching device-height.</p>
+    
+    <p>Reloads are required between orientation changes. See 'media-query-ignored' test for more information.</p>
+    
+    <p>If a result of 'n/a' is displayed, reload until a result is displayed. See 'device-width-pollution' for more information.</p>
 
     <p><strong>Expected</strong>: device-height should be a constant 1024 or 600.
     Raising the virtual keyboard should not change device-height.</p>
 
     <p><strong>Actual</strong>: Galaxy Tab changes the device width based on
-    orientation, dimensions of the browser chrome, and visibility of the
-    browser's chrome.</p>
+    orientation and height of the browser chrome.</p>
 
     <p class="result">device-height:
         <em class="na">Not applicable</em>
-        <em class="h235">235px</em>
-        <em class="h500">500px</em>
         <em class="h501">501px</em>
         <em class="h600">600px</em>
         <em class="h887">887px</em>
         <em class="h1024">1024px</em>
     </p>
+    
 </body>
 </html>

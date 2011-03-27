@@ -8,34 +8,19 @@
 .n { display:inline; }
 .w600, .w1024 { display:none; }
 
-@media only screen and (device-width:600) {
+@media only screen and (device-width:600px) {
     .n { display:none; }
     .w600 { display:inline; }
 }
-@media only screen and (device-width:1024) {
+@media only screen and (device-width:1024px) {
     .n { display:none; }
     .w1024 { display:inline; }
 }
 </style>
 </head>
 
-    <p>Loading this page in in portrait mode should display either 600 or
-    1024 below.  If neither value display,  refresh until one does (see
-    device-width-pollution test for explanation).  After an expect value is
-    displayed rotate the Galaxy Tab 90 degrees.</p>
-
-    <p>Adding a @media query for an orientation (either) fixes this partially.
-    Example:
-<pre>
-@media only screen and (orientation:portrait) {
-    /* contents do not need to match a DOM element */
-    .foobar {
-        pitch:low;
-    }
-}
-</pre>
-    Although, if the keyboard is opened while the device is rotated the Galaxy
-    Tab will not match the new device-width @media query.</p>
+    <p>Load this page in portrait mode, refresh until 600 displays below.  Next
+    rotate the Galaxy Tab 90 degrees clockwise or counter-clockwise.</p>
 
     <p><strong>Expected:</strong> After the device is rotated from portrait
     orientation (ie, while displaying 600) the number 1024 should be displayed.
@@ -43,7 +28,7 @@
     number 600 should be displayed.</p>
 
     <p><strong>Actual:</strong> The number displayed on page load is never
-    replaced on orientation change.</p>
+    replaced following an orientation change.</p>
 
     <p class="result">@media orientation:
         <em class="n">n/a</em>
@@ -51,5 +36,17 @@
         <em class="w1024">1024</em>
     </p>
 
+    <p>Note: Adding a @media query for an orientation (either) fixes this
+    partially. Example:
+<pre>
+@media only screen and (orientation:portrait) {
+    /* contents do not need to match a DOM element */
+    .ball-3 {
+        pitch: low;
+    }
+}
+</pre>
+    Although, if the keyboard is opened while the device is rotated the Galaxy
+    Tab will not match the new device-width @media query.</p>
 </body>
 </html>

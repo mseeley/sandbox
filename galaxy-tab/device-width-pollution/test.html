@@ -1,14 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-US" dir="ltr">
 <meta name="viewport" content="width=device-width, maximum-scale=1, target-densityDpi=device-dpi">
+<meta http-equiv="cache-control" content="no-cache">
+<meta http-equiv="expires" content="0">
+<meta http-equiv="pragma" content="no-cache">
 <head>
-<script>
-var swe = screen.width;
-addEventListener("load", function () {
-    document.getElementById("swe").innerHTML = swe;
-    document.getElementById("swo").innerHTML = screen.width;
-}, false);
-</script>
 <style type="text/css">
 @import url(../base.css);
 
@@ -17,21 +13,27 @@ addEventListener("load", function () {
 }
 
 @media screen and (device-width:400px) {
-    /* landscape */
+    /* pollution coming from width-400.html */
     .na { display:none; }
-    .h501 { display:inline; }
+    .w400 { display:inline; }
 }
 
 @media screen and (device-width:600px) {
-    /* 'true' landscape -- never triggered */
+    /* portrait */
     .na { display:none; }
-    .h600 { display:inline; }
+    .w600 { display:inline; }
 }
 
 @media screen and (device-width:974px) {
-    /* portrait */
+    /* pollution coming from width-974.html */
     .na { display:none; }
-    .h887 { display:inline; }
+    .w974 { display:inline; }
+}
+
+@media screen and (device-width:1024px) {
+    /* landscape */
+    .na { display:none; }
+    .w1024 { display:inline; }
 }
 </style>
 </head>
@@ -50,12 +52,16 @@ addEventListener("load", function () {
     be seen in the result region.  Also, <code>screen.width</code> should be
     consistent when accessed early in the page load or at the onload event.</p>
 
-    <p><strong>Actual</strong>: Galaxy Tab applies width of the outermost
-    element with dimensions of the previous page when loading a new page. This
-    occurs on back button pushes or full reloads.  Also, <code>screen.width</code>
-    value change depending on when it was accessed.</p>
+    <p><strong>Actual</strong>: Galaxy Tab using the viewport width from the
+    previous page (the page from which the user touched the back button) when
+    evaluation media queries.  A full reload is required to trigger the Galaxy
+    Tab to evaluate against the meta viewport of this document.</p>
 
-    <p class="result">device-height:
+    <p>NOTE: This behavior does not occur when this document's JavaScript is NOT
+    executed after the user presses the back button.  Removing the call to
+    <code>YUI().use("*")</code> prevents the inconsistent state.</p>
+
+    <p class="result">device-width:
         <em class="na">Not applicable</em>
         <em class="w400 err">400px</em>
         <em class="w600">600px</em>
@@ -63,9 +69,12 @@ addEventListener("load", function () {
         <em class="w1024">1024px</em>
     </p>
 
-    <p class="result">screen.width (early): <em id="swe"></em></p>
-
-    <p class="result">screen.width (onload): <em id="swo"></em></p>
+<script src="combo.js"></script>
+<script>
+// Somehow a YUI().use() statement triggers JavaScript to execute again after
+// back button has been pushed.
+YUI().use("*");
+</script>
 
 </body>
 </html>
